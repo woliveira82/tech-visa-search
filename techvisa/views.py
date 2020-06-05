@@ -1,5 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from .models import Company
+
 
 def index(request):
-    return HttpResponse('<h1>tech visa app</h1>')
+    company_list = Company.objects.all()
+    data = {
+        "company_list": company_list
+    }
+    return render(request,'index.html', data)

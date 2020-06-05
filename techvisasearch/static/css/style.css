@@ -1,0 +1,19 @@
+.title {
+    font-family: Verdana, sans-serif;
+    font-weight: bold;
+}
+
+button.detail {
+    font-family: Verdana, sans-serif;
+    font-weight: lighter;
+    font-size: 0.8rem;
+    color: green;
+}
+
+.clicked {
+    background-color: #777777;
+}
+
+.unclicked {
+    background-color: #cccccc;
+}

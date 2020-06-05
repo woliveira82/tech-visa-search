@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visa Tech</title>
+    <link href="{% static 'css/structure.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+<body>
+    <div id="wrapper">
+        <div id="top">
+            <div class="input-file-div">
+                <form method="POST" enctype="multipart/form-data">
+                    <p class="title">
+                        <label for="load-company">Carregar lista de empresas</label>
+                    </p>
+                    <p class="detail">Carregar arquivo .csv</p>
+                    <input type="file" id="load-company">
+                </form>
+            </div>
+            
+            <div class="input-file-div">
+                <form method="POST" enctype="multipart/form-data">
+                    <p class="title">
+                        <label for="load-job">Carregar página de Vagas</label>
+                    </p>
+                    <p class="detail">Carregar arquivo ....</p>
+                    <input type="file" id="load-job">
+                </form>
+            </div>
+
+        </div>
+        <div id="grid">
+            <div id="top-grid">
+                <button id="show-company" class="clicked">
+                    <p class="title">Mostrar Empresas</p>
+                </button>
+                <button id="show-job" class="unclicked">
+                    <p class="title">Mostrar Vagas</p>
+                </button>
+            </div>
+            <div id="table-grid">
+                <table id="tb-company">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Expires</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for company in company_list %}
+                        <tr>
+                            <td>{{ company.name }}</td>
+                            <td>{{ company.expiration_date }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <table id="tb-job">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Expires</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for company in company_list %}
+                        <tr>
+                            <td>{{ company.name }}</td>
+                            <td>{{ company.expiration_date }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
