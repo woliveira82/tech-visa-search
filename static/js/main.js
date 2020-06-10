@@ -19,11 +19,11 @@ window.onload = _ => {
     };
 
     let i_companies = document.getElementById("load-company");
+    let frm_company = document.getElementById("frm-company");
     let i_jobs = document.getElementById("load-job");
     
     i_companies.onchange = function(e) {
-        console.log(e);
-        console.log(this);
+        frm_company.submit();
     }
     
     i_jobs.onchange = function(e) {
