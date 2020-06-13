@@ -6,17 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visa Tech</title>
     <link href="{% static 'css/index.css' %}" rel="stylesheet">
-    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/company.css' %}" rel="stylesheet">
 </head>
 <body>
     <div id="wrapper">
         <div id="top">
             <div id="d-button">
-                <a class="btn-link" href="/companies">IMPORT COMPANIES</a>
+                <a class="btn-link" href="/">SEARCH JOBS</a>
             </div>
             <div id="d-input">
-                <form action="/jobs" method="POST">
-                    <input type="text" name="i-job-link"><br>
+                <form action="/companies" method="POST" enctype="multipart/form-data">
+                    <input type="file" id="i-company" name="company-list" accept="text/csv"><br>
                     <button>SEARCH LINK</button>
                 </form>
             </div>
@@ -25,8 +25,8 @@
             <table id="tb-company">
                 <thead>
                     <tr>
-                        <th>JOB</th>
-                        <th>COMPANY</th>
+                        <th>NAME</th>
+                        <th>EXPIRES</th>
                     </tr>
                 </thead>
                 <tbody>

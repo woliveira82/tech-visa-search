@@ -1,0 +1,18 @@
+button {
+    color: #FFFFFF;
+    background-color: #44AA55;
+    display: inline-block;
+    padding: 1rem 2rem;
+    text-align: center;
+    cursor: pointer;   
+    font-weight: bolder;
+}
+
+input {
+    color: #FFFFFF;
+    display: inline-block;
+    padding: 1rem 2rem;
+    text-align: center;
+    cursor: pointer;   
+    font-weight: bolder;
+}
