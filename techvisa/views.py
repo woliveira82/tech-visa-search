@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from .models import Company
 from datetime import datetime
-import requests
+from requests import get
+from bs4 import BeautifulSoup
 
 
 def index(request):
@@ -41,13 +42,35 @@ def company(request):
                 if new_company:
                     Company(**company_values).save()
                 
-                
-    company_list = Company.objects.all()
     data = {"company_list": company_list}
 
     return render(request,'company.html', data)
 
 
 def job(request):
-    job_url =request.POST['i-job-link']
-    return render(request,'index.html', {"company_list":[]})
+    job_url = request.POST['i-job-link']
+    response = get(job_url)
+    page = BeautifulSoup(response.text, 'html.parser')
+    div_list = page.findAll('div', attrs={'class':'card__job-c'})
+
+    job_list = []
+    company_list = Company.objects.all()
+
+    for item in div_list:
+        job_name = item.find('a', attrs={'class': 'card__job-link'})
+        local = item.find('div', attrs={'class': 'card__job-location'})
+        company_name = item.find('div', attrs={'class': 'card__job-empname-label'})
+        href = job_name.get('href')
+        link = f'http://neuvoo.pt{href}'
+        line = {
+            'link': link,
+            'job_name': job_name.text.strip(),
+            'local': local.text.strip(),
+            'company_name': company_name.text.strip(),
+        }
+        for company in company_list:
+            if line['company_name'] in company.name:
+                job_list.append(line)
+
+    return render(request,'index.html', {'job_list': job_list})
+    

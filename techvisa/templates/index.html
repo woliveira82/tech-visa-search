@@ -26,14 +26,16 @@
                 <thead>
                     <tr>
                         <th>JOB</th>
+                        <th>LOCAL</th>
                         <th>COMPANY</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for company in company_list %}
+                    {% for job in job_list %}
                     <tr>
-                        <td>{{ company.name }}</td>
-                        <td>{{ company.expiration_date }}</td>
+                        <td><a href="{{ job.link }}" target="_blank">{{ job.job_name }}</a></td>
+                        <td>{{ job.local }}</td>
+                        <td>{{ job.company_name }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
