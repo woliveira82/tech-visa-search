@@ -31,7 +31,7 @@
     flex-direction: column;
 }
 
-a {
+a.btn-link {
     color: #FFFFFF;
     background-color: #44AA55;
     display: inline-block;
@@ -39,10 +39,22 @@ a {
     text-align: center;
     cursor: pointer;   
     font-weight: bolder;
+    text-decoration: none;
 }
 
-a:hover {
+a.a-job {
+    color: #000000;
+    text-decoration: none;
+}
+
+a.btn-link:hover {
     background-color: #55BB66;
+    text-decoration: none;
+}
+
+a.a-job:hover {
+    color: #555555;
+    text-decoration: none;
 }
 
 input[type=text] {

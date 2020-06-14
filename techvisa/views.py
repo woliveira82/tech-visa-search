@@ -42,35 +42,51 @@ def company(request):
                 if new_company:
                     Company(**company_values).save()
                 
-    data = {"company_list": company_list}
+    data = {'company_list': company_list}
 
-    return render(request,'company.html', data)
+    return render(request, 'company.html', data)
 
 
 def job(request):
     job_url = request.POST['i-job-link']
-    response = get(job_url)
-    page = BeautifulSoup(response.text, 'html.parser')
-    div_list = page.findAll('div', attrs={'class':'card__job-c'})
-
+    
+    if job_url[-3:] == 'p=1':
+        job_url = job_url[:-1]
+    
     job_list = []
-    company_list = Company.objects.all()
+    for p in range(1, 4):
+        response = get(f'{job_url}{p}')
+        print(f'{job_url}{p}')
+        if response.status_code == 200:
 
-    for item in div_list:
-        job_name = item.find('a', attrs={'class': 'card__job-link'})
-        local = item.find('div', attrs={'class': 'card__job-location'})
-        company_name = item.find('div', attrs={'class': 'card__job-empname-label'})
-        href = job_name.get('href')
-        link = f'http://neuvoo.pt{href}'
-        line = {
-            'link': link,
-            'job_name': job_name.text.strip(),
-            'local': local.text.strip(),
-            'company_name': company_name.text.strip(),
-        }
-        for company in company_list:
-            if line['company_name'] in company.name:
-                job_list.append(line)
+            page = BeautifulSoup(response.text, 'html.parser')
+            div_list = page.findAll('div', attrs={'class':'card__job-c'})
 
-    return render(request,'index.html', {'job_list': job_list})
+            company_list = Company.objects.all()
+
+            for item in div_list:
+                job_name = item.find('a', attrs={'class': 'card__job-link'})
+                local = item.find('div', attrs={'class': 'card__job-location'})
+                company_name = item.find('div', attrs={'class': 'card__job-empname-label'})
+                href = job_name.get('href')
+                link = f'http://neuvoo.pt{href}'
+                line = {
+                    'link': link,
+                    'job_name': job_name.text.strip(),
+                    'local': local.text.strip(),
+                    'company_name': company_name.text.strip(),
+                }
+                for company in company_list:
+                    if line['company_name'] in company.name:
+                        job_list.append(line)
+
+        else:
+            break
+
+    data = {
+        'job_list': job_list,
+        'i_job_link': f'{job_url}{1}',
+    }
+
+    return render(request, 'index.html', data)
     

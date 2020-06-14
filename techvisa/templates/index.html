@@ -16,7 +16,7 @@
             </div>
             <div id="d-input">
                 <form action="/jobs" method="POST">
-                    <input type="text" name="i-job-link"><br>
+                    <input type="text" name="i-job-link" value="{{ i_job_link }}"><br>
                     <button>SEARCH LINK</button>
                 </form>
             </div>
@@ -33,9 +33,9 @@
                 <tbody>
                     {% for job in job_list %}
                     <tr>
-                        <td><a href="{{ job.link }}" target="_blank">{{ job.job_name }}</a></td>
-                        <td>{{ job.local }}</td>
-                        <td>{{ job.company_name }}</td>
+                        <td><a href="{{ job.link }}" class="a-job" target="_blank">{{ job.job_name }}</a></td>
+                        <td><a href="{{ job.link }}" class="a-job" target="_blank">{{ job.local }}</a></td>
+                        <td><a href="{{ job.link }}" class="a-job" target="_blank">{{ job.company_name }}</a></td>
                     </tr>
                     {% endfor %}
                 </tbody>
